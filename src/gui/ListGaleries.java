@@ -72,7 +72,9 @@ public class ListGaleries extends BaseForm {
         RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
-        fab.addActionListener(e -> {
+        fab.addActionListener(e -> new AjouterGalerie().show()
+            
+            /*
             fab.setUIID("FloatingActionButtonClose");
             Image oldImage = fab.getIcon();
             FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
@@ -130,7 +132,9 @@ public class ListGaleries extends BaseForm {
             ListGaleries.this.setTintColor(t);
             fab.setUIID("FloatingActionButton");
             fab.setIcon(oldImage);
-        });
+            
+        }*/
+        );
         //bottom right screen floating button end ////////////////////////////////////////////////////////////////////
     }
     

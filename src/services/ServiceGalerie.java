@@ -34,17 +34,11 @@ public class ServiceGalerie {
         return instance;
     }
 
-    public boolean addGalerie(Galerie g) {
-
-        String Nom = g.getNom();
-        String couleurHtml = g.getCouleurHtml();
-        String Description = g.getDescription();
-        User Photographe = g.getPhotographe();
-        
+    public boolean addGalerie(String Nom, String couleurHtml, String Description, String IdUser) {    
         // http://127.0.0.1:8000/galerie/mobileNew?nom=testNom&description=testDesc&color=%23ff00&idUser=734
         String url = Statics.BASE_URL + "galerie/mobileNew?nom=" + Nom + "&description=" + Description
-                + "color=" + couleurHtml + "&iduser=" + Photographe.getID_User();
-
+            + "&color=" + couleurHtml + "&idUser=" + IdUser;
+        System.out.println(url);
         req.setUrl(url);
         req.setPost(false);
         
