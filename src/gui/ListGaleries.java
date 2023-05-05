@@ -183,7 +183,7 @@ public class ListGaleries extends BaseForm {
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText("----");
+        gui_Label_1.setText(gal.getPhotographe().getNom()+" "+gal.getPhotographe().getPrenom());
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);

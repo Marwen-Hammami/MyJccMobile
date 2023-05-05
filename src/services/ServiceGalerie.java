@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import utils.Type;
 
 public class ServiceGalerie {
 
@@ -68,12 +69,31 @@ public class ServiceGalerie {
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
             for (Map<String, Object> obj : list) {
                 Galerie g = new Galerie();
+                //pour retirer la vergule sinon : Exception: java.lang.NumberFormatException - For input string: "1.0"
                 float id = Float.parseFloat(obj.get("idGalerie").toString());
                 g.setID_Galerie((int) id);
                 g.setCouleurHtml(obj.get("couleurhtml").toString());
                 g.setDescription(obj.get("description").toString());
                 g.setNom(obj.get("nom").toString());
-                //g.setPhotographe((User) obj.get("idPhotographe"));
+                //récupérer les attribus de user photographe dans galerie
+                Map<String, Object> photographeJson = (Map<String, Object>) obj.get("idPhotographe");
+                User photographe = new User();
+                //pour retirer la vergule sinon : Exception: java.lang.NumberFormatException - For input string: "693.0"
+                //photographe.setID_User(Integer.parseInt(photographeJson.get("idUser").toString().substring(0, photographeJson.get("idUser").toString().indexOf("."))));
+                float ID_User = Float.parseFloat(photographeJson.get("idUser").toString());
+                photographe.setID_User((int) ID_User);
+                photographe.setNom(photographeJson.get("nom").toString());
+                photographe.setPrenom(photographeJson.get("prenom").toString());
+                photographe.setSexe(photographeJson.get("genre").toString());
+                photographe.setEmail(photographeJson.get("email").toString());
+                photographe.setMotDePasse(photographeJson.get("motdepasse").toString());
+                //récupérer le role et le transformer en enum
+                String roleString = photographeJson.get("role").toString();
+                Type role = Type.valueOf(roleString.toUpperCase());
+                photographe.setRole(role);
+                photographe.setPhotoB64(photographeJson.get("photob64").toString());
+                //photographe.setNumTel(Integer.parseInt(photographeJson.get("numtel").toString()));
+                g.setPhotographe(photographe);
           
                 galeries.add(g);
             }
@@ -99,3 +119,25 @@ public class ServiceGalerie {
         return galeries;
     }
 }
+
+/* exemple json
+{
+    "idGalerie": 1,
+    "couleurhtml": "#c9f9a9",
+    "nom": "Expérience",
+    "description": "Du haut de mes 53 ans,je suis surtout un photogaphe avec plus de 30 ans d'expérience!",
+    "idPhotographe": {
+      "idUser": 693,
+      "nom": "Hammami",
+      "prenom": "Marwen",
+      "genre": "Homme",
+      "email": "marwen.hammami@esprit.tn",
+      "motdepasse": "$2a$10$30ZtUAO5rgKjLx8yglgQn.4wOQMVztMOFPMEjqkpqXimUXWSltpu2",
+      "role": "PHOTOGRAPHE",
+      "photob64": "http://localhost/myjcc/profile/5.jpg",
+      "numtel": 20924931
+    }
+  },
+
+
+*/

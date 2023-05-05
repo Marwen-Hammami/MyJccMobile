@@ -43,11 +43,11 @@ public class SplashForm extends com.codename1.ui.Form {
     public SplashForm(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
-        int size = Display.getInstance().convertToPixels(0.5f);
-        Image progress = Effects.dropshadow(resourceObjectInstance.getImage("progress.png"), 10, 70, size, size);
+        int size = Display.getInstance().convertToPixels(1f);
+        Image progress = Effects.dropshadow(resourceObjectInstance.getImage("logo2.png"), 10, 70, size, size);
         gui_Infinite_Progress_1.setAnimation(progress);
         gui_Infinite_Progress_1.setAngleIncrease(1);
-        Image logoImage = Effects.dropshadow(resourceObjectInstance.getImage("logo.png"), 10, 70, size, size);
+        Image logoImage = Effects.dropshadow(resourceObjectInstance.getImage("typo.png"), 10, 70, size, size);
         gui_Label_1.setIcon(logoImage);
         UITimer.timer(3000, false, this, () -> new WalkthruForm(resourceObjectInstance).show());
     }
