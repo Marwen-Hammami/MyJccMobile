@@ -2,13 +2,13 @@ package entities;
 
 import utils.EnumEtatContrat;
 import utils.EnumTypeContrat;
-import java.sql.Date;
+//import java.sql.Date;
 
 public class ContratSponsoring {
     //var
     private int ID_Contrat;
-    private Date DateDebut;
-    private Date DateFin;
+    //private Date DateDebut;
+    //private Date DateFin;
     private EnumTypeContrat Type;
     private EnumEtatContrat Etat;
     private float SalaireDt;
@@ -22,9 +22,8 @@ public class ContratSponsoring {
     public ContratSponsoring() {
     }
 
-    public ContratSponsoring(Date DateDebut, Date DateFin, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
-        this.DateDebut = DateDebut;
-        this.DateFin = DateFin;
+    public ContratSponsoring( EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
+        
         this.Type = Type;
         this.Etat = Etat;
         this.SalaireDt = SalaireDt;
@@ -35,10 +34,9 @@ public class ContratSponsoring {
         this.SignaturePhotographe = SignaturePhotographe;
     }
 
-    public ContratSponsoring(int ID_Contrat, Date DateDebut, Date DateFin, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
+    public ContratSponsoring(int ID_Contrat, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
         this.ID_Contrat = ID_Contrat;
-        this.DateDebut = DateDebut;
-        this.DateFin = DateFin;
+        
         this.Type = Type;
         this.Etat = Etat;
         this.SalaireDt = SalaireDt;
@@ -57,21 +55,7 @@ public class ContratSponsoring {
         this.ID_Contrat = ID_Contrat;
     }
 
-    public Date getDateDebut() {
-        return DateDebut;
-    }
 
-    public void setDateDebut(Date DateDebut) {
-        this.DateDebut = DateDebut;
-    }
-
-    public Date getDateFin() {
-        return DateFin;
-    }
-
-    public void setDateFin(Date DateFin) {
-        this.DateFin = DateFin;
-    }
 
     public EnumTypeContrat getType() {
         return Type;
@@ -139,7 +123,7 @@ public class ContratSponsoring {
 
     @Override
     public String toString() {
-        return "ContratSponsoring{" + "ID_Contrat=" + ID_Contrat + ", DateDebut=" + DateDebut + ", DateFin=" + DateFin + ", Type=" + Type + ", Etat=" + Etat + ", SalaireDt=" + SalaireDt + ", TermesPDF=" + TermesPDF + ", Sponsor=" + Sponsor + ", SignatureSponsor=" + SignatureSponsor + ", Photoraphe=" + Photoraphe + ", SignaturePhotographe=" + SignaturePhotographe + '}';
+        return "ContratSponsoring{" + "ID_Contrat=" + ID_Contrat +  ", Type=" + Type + ", Etat=" + Etat + ", SalaireDt=" + SalaireDt + ", TermesPDF=" + TermesPDF + ", Sponsor=" + Sponsor + ", SignatureSponsor=" + SignatureSponsor + ", Photoraphe=" + Photoraphe + ", SignaturePhotographe=" + SignaturePhotographe + '}';
     }
 
 

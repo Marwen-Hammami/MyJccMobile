@@ -18,6 +18,7 @@
  */
 package TemplatesFiles;
 
+import gui.BaseForm;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;

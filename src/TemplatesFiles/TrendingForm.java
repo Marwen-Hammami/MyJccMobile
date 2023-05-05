@@ -18,6 +18,7 @@
  */
 package TemplatesFiles;
 
+import gui.BaseForm;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.layouts.BorderLayout;
