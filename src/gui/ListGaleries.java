@@ -209,14 +209,14 @@ public class ListGaleries extends BaseForm {
         updateBtn.addActionListener(e -> {
             System.out.println("update");
             dlg.dispose();
-            new ListGaleries().show();
+            new ModifierGalerie(gal).show();;
         });
 
         Button delBtn = new Button("Supprimer");
         delBtn.addActionListener(e -> {
             ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
             dlg.dispose();
-            new ModifierGalerie(gal).show();;
+            new ListGaleries().show();
         });
         
         Button annulerBtn = new Button("Annuler");

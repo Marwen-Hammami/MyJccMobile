@@ -39,7 +39,29 @@ public class ServiceGalerie {
         String url = Statics.BASE_URL + "galerie/mobileNew?nom=" + Nom + "&description=" + Description
             + "&color=" + couleurHtml + "&idUser=" + IdUser;
         System.out.println(url);
-        req.setUrl(url);
+        String part1 = url.substring(0, url.indexOf("#"));
+        String part2 = url.substring(url.indexOf("#") + 1, url.length());
+        req.setUrl(part1 + "%23" + part2);
+        req.setPost(false);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean modifierGalerie(int id, String Nom, String couleurHtml, String Description, String IdUser) {    
+        // http://127.0.0.1:8000/galerie/mobileUpdate/732?nom=testModif&description=testDesc&color=%23fffff&idUser=734
+        String url = Statics.BASE_URL + "galerie/mobileUpdate/" + id + "?nom=" + Nom + "&description=" + Description
+            + "&color=" + couleurHtml + "&idUser=" + IdUser;
+        String part1 = url.substring(0, url.indexOf("#"));
+        String part2 = url.substring(url.indexOf("#") + 1, url.length());
+        req.setUrl(part1 + "%23" + part2);
         req.setPost(false);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {

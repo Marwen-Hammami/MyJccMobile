@@ -8,16 +8,14 @@ import entities.Galerie;
 import services.ServiceGalerie;
 
 public class ModifierGalerie extends com.codename1.ui.Form {
-
-    public ModifierGalerie() {
-        this(com.codename1.ui.util.Resources.getGlobalResources());
-    }
+    Galerie g = new Galerie();
     
     public ModifierGalerie(Galerie gal) {
-        this(com.codename1.ui.util.Resources.getGlobalResources());
+        this(com.codename1.ui.util.Resources.getGlobalResources(), gal);
     }
     
-    public ModifierGalerie(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public ModifierGalerie(com.codename1.ui.util.Resources resourceObjectInstance, Galerie gal) {
+        g = gal;
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
         getToolbar().setUIID("Container");
@@ -87,13 +85,13 @@ public class ModifierGalerie extends com.codename1.ui.Form {
         gui_Component_Group_1.addComponent(gui_Text_Field_Nom);
         gui_Component_Group_1.addComponent(gui_Text_Field_Description);
         gui_Component_Group_1.addComponent(gui_Text_Field_Photographe);
-        gui_Text_Field_couleurHtml.setText("couleurHtml");
+        gui_Text_Field_couleurHtml.setText(g.getCouleurHtml());
         gui_Text_Field_couleurHtml.setName("Text_Field_couleurHtml");
-        gui_Text_Field_Nom.setText("Nom");
+        gui_Text_Field_Nom.setText(g.getNom());
         gui_Text_Field_Nom.setName("Text_Field_Nom");
-        gui_Text_Field_Description.setText("Description");
+        gui_Text_Field_Description.setText(g.getDescription());
         gui_Text_Field_Description.setName("Text_Field_Description");
-        gui_Text_Field_Photographe.setText("ID Photographe");
+        gui_Text_Field_Photographe.setText(Integer.toString(g.getPhotographe().getID_User()));
         gui_Text_Field_Photographe.setName("Text_Field_Photographe");
         gui_Container_1.addComponent(gui_Button_2);
         //gui_Container_1.addComponent(gui_Button_3);
@@ -101,8 +99,8 @@ public class ModifierGalerie extends com.codename1.ui.Form {
         gui_Label_1.setName("Label_1");
         gui_Label_1.setIcon(resourceObjectInstance.getImage("profile_image.png"));
         gui_Component_Group_1.setName("Component_Group_1");
-        gui_Button_2.setText("Ajouter");
-        gui_Button_2.setName("Button_Ajouter");
+        gui_Button_2.setText("Modifier");
+        gui_Button_2.setName("Button_Modifier");
         //gui_Button_3.setText("Forgot Your Password");
         //gui_Button_3.setUIID("CenterLabelSmall");
         //gui_Button_3.setName("Button_3");
@@ -131,7 +129,7 @@ public class ModifierGalerie extends com.codename1.ui.Form {
             String Description = gui_Text_Field_Description.getText();
             String IdUser = gui_Text_Field_Photographe.getText();
             try {
-                        if(ServiceGalerie.getInstance().addGalerie(Nom, couleurHtml, Description, IdUser))
+                        if(ServiceGalerie.getInstance().modifierGalerie(g.getID_Galerie(), Nom, couleurHtml, Description, IdUser))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
                         }else
