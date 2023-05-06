@@ -5,6 +5,7 @@ import gui.BaseForm;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -65,77 +66,12 @@ public class ListGaleries extends BaseForm {
         gui_Text_Area_1.setRows(2);
         gui_Text_Area_1.setColumns(100);
         gui_Text_Area_1.setEditable(false);*/
-        
-        
-        //bottom right screen floating button start ////////////////////////////////////////////////////////////////////
+
         FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
         RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
-        fab.addActionListener(e -> new AjouterGalerie().show()
-            
-            /*
-            fab.setUIID("FloatingActionButtonClose");
-            Image oldImage = fab.getIcon();
-            FontImage image = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "FloatingActionButton", 3.8f);
-            fab.setIcon(image);
-            Dialog popup = new Dialog();
-            popup.setDialogUIID("Container");
-            popup.setLayout(new LayeredLayout());
-            
-            Button c1 = new Button(resourceObjectInstance.getImage("contact-a.png"));
-            Button c2 = new Button(resourceObjectInstance.getImage("contact-b.png"));
-            Button c3 = new Button(resourceObjectInstance.getImage("contact-c.png"));
-            Button trans = new Button(" ");
-            trans.setUIID("Container");
-            c1.setUIID("Container");
-            c2.setUIID("Container");
-            c3.setUIID("Container");
-            Style c1s = c1.getAllStyles();
-            Style c2s = c2.getAllStyles();
-            Style c3s = c3.getAllStyles();
-            
-            c1s.setMarginUnit(Style.UNIT_TYPE_DIPS);
-            c2s.setMarginUnit(Style.UNIT_TYPE_DIPS);
-            c3s.setMarginUnit(Style.UNIT_TYPE_DIPS);
-
-            c1s.setMarginBottom(16);
-            c1s.setMarginLeft(12);
-            c1s.setMarginRight(3);
-
-            c2s.setMarginLeft(4);
-            c2s.setMarginTop(5);
-            c2s.setMarginBottom(10);
-            c3s.setMarginRight(14);
-            
-            c3s.setMarginTop(12);
-            c3s.setMarginRight(16);
-
-            popup.add(trans).
-                    add(FlowLayout.encloseIn(c1)).
-                    add(FlowLayout.encloseIn(c2)).
-                    add(FlowLayout.encloseIn(c3));
-            
-            ActionListener a = ee -> popup.dispose();
-            
-            trans.addActionListener(a);
-            c1.addActionListener(a);
-            c2.addActionListener(a);
-            c3.addActionListener(a);
-            
-            popup.setTransitionInAnimator(CommonTransitions.createEmpty());
-            popup.setTransitionOutAnimator(CommonTransitions.createEmpty());
-            popup.setDisposeWhenPointerOutOfBounds(true);
-            int t = ListGaleries.this.getTintColor();
-            ListGaleries.this.setTintColor(0);
-            popup.showPopupDialog(new Rectangle(ListGaleries.this.getWidth() - 10, ListGaleries.this.getHeight() - 10, 10, 10));
-            ListGaleries.this.setTintColor(t);
-            fab.setUIID("FloatingActionButton");
-            fab.setIcon(oldImage);
-            
-        }*/
-        );
-        //bottom right screen floating button end ////////////////////////////////////////////////////////////////////
+        fab.addActionListener(e -> new AjouterGalerie().show());
     }
     
     //Ancienne methode pour populer l'affichage des galeries
@@ -182,6 +118,39 @@ public class ListGaleries extends BaseForm {
         com.codename1.ui.Label gui_Label_2 = new com.codename1.ui.Label();
         com.codename1.ui.TextArea gui_Text_Area_1 = new com.codename1.ui.TextArea();
         com.codename1.ui.Label gui_Label_6 = new com.codename1.ui.Label();
+        //click event
+        gui_Text_Area_1.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        });
+        gui_Label_2.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        });
+        gui_Label_3.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        });
+        gui_Label_1.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        });
+        gui_Label_4.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        });
+        //release click unclick event
+        gui_Text_Area_1.addPointerReleasedListener(e -> {
+            elementUnClicked(resourceObjectInstance, gui_Label_4);
+        });
+        gui_Label_2.addPointerReleasedListener(e -> {
+            elementUnClicked(resourceObjectInstance, gui_Label_4);
+        });
+        gui_Label_3.addPointerReleasedListener(e -> {
+            elementUnClicked(resourceObjectInstance, gui_Label_4);
+        });
+        gui_Label_1.addPointerReleasedListener(e -> {
+            elementUnClicked(resourceObjectInstance, gui_Label_4);
+        });
+        gui_Label_4.addPointerReleasedListener(e -> {
+            elementUnClicked(resourceObjectInstance, gui_Label_4);
+        });
+        
         addComponent(gui_Container_1);
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
@@ -220,6 +189,43 @@ public class ListGaleries extends BaseForm {
         
         
         
-    }// </editor-fold>
+    }
+    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,Galerie gal){
+        gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round-selected.png"));
+        elementLongClicked(gal);
+        elementUnClicked(resourceObjectInstance, gui_Label_4);
+    }
+    
+    private void elementUnClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4){
+        gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
+    }
+    
+    private void elementLongClicked(Galerie gal){
+        Dialog dlg = new Dialog("Galerie: " + gal.getNom(), new BoxLayout(BoxLayout.Y_AXIS));
+        Label label = new Label("Veuillez sélectionner une action");
+        dlg.add(label);
 
+        Button updateBtn = new Button("Modifier");
+        updateBtn.addActionListener(e -> {
+            System.out.println("update");
+            dlg.dispose();
+            new ListGaleries().show();
+        });
+
+        Button delBtn = new Button("Supprimer");
+        delBtn.addActionListener(e -> {
+            ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
+            dlg.dispose();
+            new ModifierGalerie(gal).show();;
+        });
+        
+        Button annulerBtn = new Button("Annuler");
+        annulerBtn.addActionListener(e -> {
+            dlg.dispose();
+        });
+
+        dlg.add(new Container(new BoxLayout(BoxLayout.X_AXIS)).add(updateBtn).add(delBtn).add(annulerBtn));
+        dlg.show();
+        
+    }
 }

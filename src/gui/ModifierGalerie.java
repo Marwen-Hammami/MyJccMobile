@@ -4,15 +4,20 @@ import TemplatesFiles.*;
 import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
+import entities.Galerie;
 import services.ServiceGalerie;
 
-public class AjouterGalerie extends com.codename1.ui.Form {
+public class ModifierGalerie extends com.codename1.ui.Form {
 
-    public AjouterGalerie() {
+    public ModifierGalerie() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
     
-    public AjouterGalerie(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public ModifierGalerie(Galerie gal) {
+        this(com.codename1.ui.util.Resources.getGlobalResources());
+    }
+    
+    public ModifierGalerie(com.codename1.ui.util.Resources resourceObjectInstance) {
         initGuiBuilderComponents(resourceObjectInstance);
         getTitleArea().setUIID("Container");
         getToolbar().setUIID("Container");

@@ -52,6 +52,24 @@ public class ServiceGalerie {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    
+    public boolean deleteGalerie(String idGal) {    
+        // http://127.0.0.1:8000/galerie/mobileDelete/729
+        String url = Statics.BASE_URL + "galerie/mobileDelete/" + idGal ;
+        System.out.println(url);
+        req.setUrl(url);
+        req.setPost(false);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 
     public ArrayList<Galerie> parseGaleries(String jsonText) {
         try {
