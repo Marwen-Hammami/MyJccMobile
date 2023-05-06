@@ -20,6 +20,7 @@ package TemplatesFiles;
 
 //import com.codename1.progress.ArcProgress;
 //import com.codename1.progress.CircleProgress;
+import gui.BaseForm;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
