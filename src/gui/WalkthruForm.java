@@ -1,24 +1,6 @@
-/*
- * Copyright (c) 2016, Codename One
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions 
- * of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
- */
+package gui;
 
-package TemplatesFiles;
-
+import TemplatesFiles.*;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.ButtonGroup;
@@ -37,9 +19,9 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 
 /**
- * GUI builder created Form
- *
- * @author shai
+ * Première interface avec laquel l'utilisateur peut intéragir apres le chargement
+ * Affiche 3 films ou évennement ou mise a jour
+ * 
  */
 public class WalkthruForm extends com.codename1.ui.Form {
 
@@ -127,43 +109,46 @@ public class WalkthruForm extends com.codename1.ui.Form {
         bg.add(gui_tab3);
         gui_tab1.setSelected(true);
         
-        Image bla = resourceObjectInstance.getImage("bla.jpg");
-        Image griffith = resourceObjectInstance.getImage("griffith.jpg");
-        Image learn = resourceObjectInstance.getImage("learn-codename-one.jpg");
+        //première interface 
+        Image bla = resourceObjectInstance.getImage("jcc33edition.jpg");
+        //deuxieme interface
+        Image griffith = resourceObjectInstance.getImage("webui.jpg");
+        //troisieme interface
+        Image learn = resourceObjectInstance.getImage("prix-parallele.jpg");
         
         gui_tab1Root.setLayout(new BorderLayout());
         gui_tab2Root.setLayout(new BorderLayout());
         gui_tab3Root.setLayout(new BorderLayout());
         
-        String line1 =  "The rule of thirds states that an image is\nmost pleasing when its subjects or\nregions are ...";
+        String line1 =  "En cette 33ème session,\nles Journées Cinématographiques de Carthage (JCC)\nfêtent leur 56ème printemps.";   
         if(!Display.getInstance().isTablet()) {
             line1 = line1.replace('\n', ' ');
         }
 
-        String line2 =  "The second page of a wizard is important\nbut nothing beats the third page ...";
+        String line2 =  "Notre application est désormais disponible sur Desktop, Web et mobile, grâce aux efforts acharnés de nos équipes!!!";
         if(!Display.getInstance().isTablet()) {
             line2 = line2.replace('\n', ' ');
         }
 
-        String line3 =  "This is all made possible thanks to\nCodename One which makes it\nwork on all OS's ...";
+        String line3 =  "Soyez au rendez-vous pour la cérémonie de la remise des prix des jurys Parallèles, vendredi le 4 novembre à l’hôtel l’Africa 5ème étage à 15h.";
         if(!Display.getInstance().isTablet()) {
             line3 = line3.replace('\n', ' ');
         }
         
         Container content1 = BoxLayout.encloseY(
-                new Label("Rule of thirds", "WelcomeTitle"),
+                new Label("33ème Edition", "WelcomeTitle"),
                 new Label(resourceObjectInstance.getImage("welcome-separator.png"), "WelcomeTitle"),
                 new SpanLabel(line1, "WelcomeBody")
         );
 
         Container content2 = BoxLayout.encloseY(
-                new Label("Rule of Page 2", "WelcomeTitle"),
+                new Label("3 plateformes", "WelcomeTitle"),
                 new Label(resourceObjectInstance.getImage("welcome-separator.png"), "WelcomeTitle"),
                 new SpanLabel(line2, "WelcomeBody")
         );
 
         Container content3 = BoxLayout.encloseY(
-                new Label("Codename One", "WelcomeTitle"),
+                new Label("Remise des prix", "WelcomeTitle"),
                 new Label(resourceObjectInstance.getImage("welcome-separator.png"), "WelcomeTitle"),
                 new SpanLabel(line3, "WelcomeBody")
         );
@@ -315,7 +300,7 @@ public class WalkthruForm extends com.codename1.ui.Form {
         ((com.codename1.ui.layouts.FlowLayout)gui_Container_6.getLayout()).setValign(com.codename1.ui.Component.CENTER);
         gui_Container_6.addComponent(gui_Button_1);
         gui_Container_6.addComponent(gui_Label_1);
-        gui_Button_1.setText("Get Started");
+        gui_Button_1.setText("Démarrer");
         gui_Button_1.setUIID("GetStartedButton");
         gui_Button_1.setName("Button_1");
         gui_Button_1.setTextPosition(com.codename1.ui.Component.LEFT);

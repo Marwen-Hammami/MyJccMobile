@@ -1,20 +1,5 @@
 /*
- * Copyright (c) 2016, Codename One
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions 
- * of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+ * Ne pas déplacer ce fichier (première interface appelé par le theme)
  */
 
 package TemplatesFiles;
@@ -28,11 +13,11 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Effects;
 import com.codename1.ui.util.UITimer;
+import gui.WalkthruForm;
 
 /**
- * GUI builder created Form
- *
- * @author shai
+* Ce fichier représente la première interface lancé avec l'application
+* Le logo qui tourne, ensuite redirection
  */
 public class SplashForm extends com.codename1.ui.Form {
 
@@ -49,6 +34,7 @@ public class SplashForm extends com.codename1.ui.Form {
         gui_Infinite_Progress_1.setAngleIncrease(1);
         Image logoImage = Effects.dropshadow(resourceObjectInstance.getImage("typo.png"), 10, 70, size, size);
         gui_Label_1.setIcon(logoImage);
+        //Redirection apres timer
         UITimer.timer(3000, false, this, () -> new WalkthruForm(resourceObjectInstance).show());
     }
 
