@@ -20,7 +20,7 @@ import services.ServiceGalerie;
 
 public class ListMesContrats extends BaseForm {
     
-    int idCurrentUserSponsor = 727;
+    int idCurrentUserSponsor = 734;
 
     public ListMesContrats() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
@@ -160,16 +160,15 @@ public class ListMesContrats extends BaseForm {
 
         Button updateBtn = new Button("Modifier");
         updateBtn.addActionListener(e -> {
-            System.out.println("update");
             dlg.dispose();
-            //new ModifierGalerie(gal).show();;
+            new ModifierContrat(cont).show();;
         });
 
         Button delBtn = new Button("Supprimer");
         delBtn.addActionListener(e -> {
-            //ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
+            ServiceContratSponsoring.getInstance().deleteContrat(String.valueOf(cont.getID_Contrat()));
             dlg.dispose();
-            //new ListGaleries().show();
+            new ListMesContrats().showBack();
         });
         
         Button annulerBtn = new Button("Annuler");

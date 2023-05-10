@@ -16,6 +16,16 @@ import java.util.Map;
 import utils.EnumEtatContrat;
 import utils.EnumTypeContrat;
 import utils.Type;
+//PDF imports
+/*
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfPTable;
+*/
 
 public class ServiceContratSponsoring {
     
@@ -36,8 +46,58 @@ public class ServiceContratSponsoring {
         return instance;
     }
     
+    public boolean modifierContrat(int ic, int is, int ip, String d, String f, String t, String s) {    
+        // http://127.0.0.1:8000/contratsponsoring/mobileUpdate?ic=82&is=727&ip=734&d=2023-05-10&f=2023-06-12&t=ParPhoto&e=Proposition&s=9.2
+        String url = Statics.BASE_URL + "contratsponsoring/mobileUpdate?ic=" + ic + "&is=" + is + "&ip=" + ip 
+                + "&d=" + d+ "&f=" + f + "&t=" + t + "&e=ContreProposition&s=" + s ;
+        req.setUrl(url);
+        req.setPost(false);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean deleteContrat(String idC) {    
+        // http://127.0.0.1:8000/contratsponsoring/mobileDelete/145
+        String url = Statics.BASE_URL + "contratsponsoring/mobileDelete/" + idC ;
+        System.out.println(url);
+        req.setUrl(url);
+        req.setPost(false);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
     // http://127.0.0.1:8000/contratsponsoring/ncm?is=727&ip=734&d=2023-05-10&f=2023-06-12&t=ParPhoto&e=Proposition&s=9.2
-    public boolean addContrat(int is, int ip, String d, String f, String t, String s) {    
+    public boolean addContrat(int is, int ip, String d, String f, String t, String s) {   
+        /* Creation pdf
+        User sponsor = new User();
+        sponsor.setID_User(is);
+        User photographe = new User();
+        photographe.setID_User(ip);
+        ContratSponsoring c = new ContratSponsoring(d, f, EnumTypeContrat.valueOf(t), EnumEtatContrat.Proposition
+                , Float.parseFloat(s), t, sponsor, "http://localhost/myjcc/contrats/signatures/def.png", photographe
+                , "http://localhost/myjcc/contrats/signatures/def.png");
+        try {
+            createPdf("C:\\Users\\Marwen\\Desktop\\mercedess.pdf", c);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        */
         String url = Statics.BASE_URL + "contratsponsoring/ncm?is=" + is + "&ip=" + ip + "&d=" + d+ "&f=" + f
             + "&t=" + t + "&e=Proposition&s=" + s ;
         req.setUrl(url);
@@ -143,6 +203,77 @@ public class ServiceContratSponsoring {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return contrats;
     }
+    /*
+    //Créer un pdf avec les informations du contrat
+    //exemple dest ‪C:\Users\Marwen\Desktop\testContrat.pdf
+    public void createPdf(String dest, ContratSponsoring c) throws Exception {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(dest));
+        document.open();
+
+        // Add header
+        Paragraph header = new Paragraph("Contrat Sponsoring : " + c.getEtat().toString());
+        header.setAlignment(Element.ALIGN_CENTER);
+        document.add(header);
+
+        // Create table
+        PdfPTable table = new PdfPTable(2);
+        Paragraph contentSponsor = new Paragraph("Sponsor : " + c.getSponsor().getNom() + " " + c.getSponsor().getPrenom()
+                + "\nEmail : " + c.getSponsor().getEmail());
+        table.addCell(contentSponsor);
+        Paragraph contentPhotographe = new Paragraph("Sponsor : " + c.getPhotoraphe().getNom() + " " + c.getPhotoraphe().getPrenom()
+                + "\nEmail : " + c.getPhotoraphe().getEmail());
+        table.addCell(contentPhotographe);
+        Image imageSponsor = Image.getInstance(c.getSponsor().getPhotoB64());
+        imageSponsor.scaleToFit(200, 200);
+        table.addCell(imageSponsor);
+        Image imagePhotographe = Image.getInstance(c.getPhotoraphe().getPhotoB64());
+        imagePhotographe.scaleToFit(200, 200);
+        table.addCell(imagePhotographe);
+        table.setSpacingBefore(30f);
+        table.setSpacingAfter(30f);
+
+        document.add(table);
+
+        //Add termes du contrat
+        Paragraph contentTermes = new Paragraph("Date de début du contrat : " + c.getDateDebut()
+                + "\nDate de Fin du contrat : " + c.getDateFin()
+                + "\nType de contrat : " + c.getType()
+                + "\nSalaire en Dt : " + c.getSalaireDt());
+        document.add(contentTermes);
+
+        // Add footer
+        Paragraph footer = new Paragraph("Le " + "10/05/2023"
+                + "\nSignature Sponsor :");
+        footer.setAlignment(Element.ALIGN_CENTER);
+        document.add(footer);
+        //Signatures***********
+        // Create table2
+        PdfPTable table2 = new PdfPTable(2);
+        Paragraph LeSponsor = new Paragraph("Signature du Sponsor");
+        table2.addCell(LeSponsor);
+        Paragraph LePhotographe = new Paragraph("Signature du Photographe");
+        table2.addCell(LePhotographe);
+
+        //selon etat****************************
+            Image SignatureSponsor = Image.getInstance("http://localhost/myjcc/contrats/signatures/def.png");
+            imageSponsor.scaleToFit(200, 200);
+            table2.addCell(SignatureSponsor);
+            Image SignaturePhotographe = Image.getInstance("http://localhost/myjcc/contrats/signatures/def.png");
+            imagePhotographe.scaleToFit(200, 200);
+            table2.addCell(SignaturePhotographe);
+        
+        //**************************************
+
+        table2.setSpacingBefore(30f);
+        table2.setSpacingAfter(30f);
+
+        document.add(table2);
+        //**********************
+        document.close();
+    }
+    //---------------------------------------------
+    */
 }
 
 /*

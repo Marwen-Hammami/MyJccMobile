@@ -34,6 +34,20 @@ public class ContratSponsoring {
         this.SignaturePhotographe = SignaturePhotographe;
     }
 
+    public ContratSponsoring(String DateDebut, String DateFin, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
+        this.DateDebut = DateDebut;
+        this.DateFin = DateFin;
+        this.Type = Type;
+        this.Etat = Etat;
+        this.SalaireDt = SalaireDt;
+        this.TermesPDF = TermesPDF;
+        this.Sponsor = Sponsor;
+        this.SignatureSponsor = SignatureSponsor;
+        this.Photoraphe = Photoraphe;
+        this.SignaturePhotographe = SignaturePhotographe;
+    }
+    
+
     public ContratSponsoring(int ID_Contrat, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
         this.ID_Contrat = ID_Contrat;
         
