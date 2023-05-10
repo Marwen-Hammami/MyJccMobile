@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import TemplatesFiles.*;
@@ -32,11 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import services.ServiceVote;
 
-/**
- *
- * @author wael
- */
-public class ListVotes extends BaseForm{
+public class ListVotes extends BaseForm {
+
     public ListVotes() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
@@ -49,14 +41,14 @@ public class ListVotes extends BaseForm{
     
     
     public ListVotes(com.codename1.ui.util.Resources resourceObjectInstance) {
-        //get toutes les votes
+        //get toutes les veries
         ArrayList<Vote> votes = ServiceVote.getInstance().getAllVotes();
 
         initGuiBuilderComponents(resourceObjectInstance, votes);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Votes", "Title")//,
+                        new Label("Vote", "Title")//,
                         //new Label("19", "InboxNumber")
                 )
         );
@@ -79,29 +71,28 @@ public class ListVotes extends BaseForm{
         RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
         rb.uiid(true);
         fab.bindFabToContainer(getContentPane());
-        fab.addActionListener(e -> new AjouterVote().show());
+        //fab.addActionListener(e -> new AjouterVote().show());
     }
     
-    //Ancienne methode pour populer l'affichage des votes
-    public void addElement(Vote gal) {
+    //Ancienne methode pour populer l'affichage des veries
+    public void addElement(Vote v) {
         Container card = new Container(new BorderLayout());
         card.getStyle().setMargin(0, 0, 10, 10);
 
-        
-        int rateValue = gal.getValeur();
+        int rateValue = v.getValeur();
         Label rate = new Label(String.valueOf(rateValue), "Rate");
         rate.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.NORTH, rate);
 
-        Label commentaire = new Label(gal.getCommentaire(), "Commentaire");
+        Label commentaire = new Label(v.getCommentaire(), "Commentaire");
         commentaire.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.CENTER, commentaire);
 
-        Label date = new Label(gal.getDate_Vote(), "Date");
+        Label date = new Label(v.getDate_Vote(), "Date");
         date.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.SOUTH, date);
         
-        int VoteF = gal.getVote_Film();
+        int VoteF = v.getVote_Film();
         Label vote = new Label(String.valueOf(VoteF), "Vote");
         rate.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.NORTH, vote);
@@ -122,7 +113,7 @@ public class ListVotes extends BaseForm{
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
         setName("InboxForm");
-        for (Vote gal : votes) {
+        for (Vote v : votes) {
         com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         com.codename1.ui.Container gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
         com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
@@ -130,25 +121,24 @@ public class ListVotes extends BaseForm{
         com.codename1.ui.Label gui_Label_4 = new com.codename1.ui.Label();
         com.codename1.ui.Container gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         com.codename1.ui.Label gui_Label_3 = new com.codename1.ui.Label();
-        com.codename1.ui.Label gui_Label_5 = new com.codename1.ui.Label();
         com.codename1.ui.Label gui_Label_2 = new com.codename1.ui.Label();
         com.codename1.ui.TextArea gui_Text_Area_1 = new com.codename1.ui.TextArea();
         com.codename1.ui.Label gui_Label_6 = new com.codename1.ui.Label();
         //click event
         gui_Text_Area_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, v);
         });
-        gui_Label_2.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        /*gui_Label_2.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, v);
         });
         gui_Label_3.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, v);
         });
         gui_Label_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, v);
         });
         gui_Label_4.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, v);
         });
         //release click unclick event
         gui_Text_Area_1.addPointerReleasedListener(e -> {
@@ -165,14 +155,14 @@ public class ListVotes extends BaseForm{
         });
         gui_Label_4.addPointerReleasedListener(e -> {
             elementUnClicked(resourceObjectInstance, gui_Label_4);
-        });
+        });*/
         
         addComponent(gui_Container_1);
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText(gal.getUser().getNom()+" "+gal.getUser().getPrenom());
+        gui_Label_1.setText(v.getUser().getNom()+" "+v.getUser().getPrenom());
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
@@ -187,22 +177,15 @@ public class ListVotes extends BaseForm{
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Text_Area_1);
-        int valeur = gal.getValeur();
+        int valeur = v.getValeur();
         gui_Label_3.setText(String.valueOf(valeur));        
         gui_Label_3.setName("Label_3");
-        
-        gui_Text_Area_1.setText(gal.getCommentaire());
-        gui_Text_Area_1.setUIID("SmallFontLabel");
-        gui_Text_Area_1.setName("Text_Area_1");
-        
-        gui_Label_2.setText(gal.getDate_Vote());
+        gui_Label_2.setText(v.getDate_Vote());
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
-        
-        int voteF = gal.getVote_Film();
-        gui_Label_5.setText(String.valueOf(voteF));        
-        gui_Label_5.setName("Label_5");
-        
+        gui_Text_Area_1.setText(v.getCommentaire());
+        gui_Text_Area_1.setUIID("SmallFontLabel");
+        gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
         gui_Container_4.setName("Container_4");
         ((com.codename1.ui.layouts.FlowLayout)gui_Container_4.getLayout()).setAlign(com.codename1.ui.Component.CENTER);
@@ -214,9 +197,9 @@ public class ListVotes extends BaseForm{
         
         
     }
-    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,Vote gal){
+    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,Vote v){
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round-selected.png"));
-        elementLongClicked(gal);
+        elementLongClicked(v);
         elementUnClicked(resourceObjectInstance, gui_Label_4);
     }
     
@@ -224,8 +207,8 @@ public class ListVotes extends BaseForm{
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
     }
     
-    private void elementLongClicked(Vote gal){
-        Dialog dlg = new Dialog("Rate: " + gal.getValeur() + " Commentaire : " + gal.getDate_Vote(), new BoxLayout(BoxLayout.Y_AXIS));
+    private void elementLongClicked(Vote v){
+        Dialog dlg = new Dialog("Rate: " + v.getValeur() + " Commentaire : " + v.getDate_Vote(), new BoxLayout(BoxLayout.Y_AXIS));
         Label label = new Label("Veuillez sélectionner une action");
         dlg.add(label);
 
@@ -233,23 +216,26 @@ public class ListVotes extends BaseForm{
         updateBtn.addActionListener(e -> {
             System.out.println("update");
             dlg.dispose();
-            new ModifierVote(gal).show();;
+            new Modifierverie(v).show();;
         });*/
 
-        Button delBtn = new Button("Supprimer");
+        /*Button delBtn = new Button("Supprimer");
         delBtn.addActionListener(e -> {
-            ServiceVote.getInstance().deleteVote(String.valueOf(gal.getID_Vote()));
+            ServiceVote.getInstance().deleteVote(String.valueOf(v.getID_Vote()));
             dlg.dispose();
             new ListVotes().show();
-        });
+        });*/
         
         Button annulerBtn = new Button("Annuler");
         annulerBtn.addActionListener(e -> {
             dlg.dispose();
         });
 
-        /*dlg.add(new Container(new BoxLayout(BoxLayout.X_AXIS)).add(updateBtn).add(delBtn).add(annulerBtn));
-        dlg.show();*/
+        Container buttonsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        buttonsContainer.addAll(annulerBtn);
+        dlg.add(buttonsContainer);
+
+        dlg.showDialog();
         
     }
 }

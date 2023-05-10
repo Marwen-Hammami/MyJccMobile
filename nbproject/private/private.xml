@@ -4,13 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/services/ServiceGalerie.java</file>
             <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/gui/ListVotes.java</file>
-            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/gui/AjouterGalerie.java</file>
-            <file>jar:file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/lib/CodenameOne_SRC.zip!/com/codename1/ui/Label.java</file>
-            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/gui/AjouterVote.java</file>
-            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/gui/ListGaleries.java</file>
-            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/TemplatesFiles/StatsForm.java</file>
+            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/entities/Film.java</file>
+            <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/utils/Statics.java</file>
             <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/entities/Vote.java</file>
             <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/gui/BaseForm.java</file>
             <file>file:/C:/Users/wael/Desktop/MyJccMobile/MyJccMobile-main/src/services/ServiceVote.java</file>

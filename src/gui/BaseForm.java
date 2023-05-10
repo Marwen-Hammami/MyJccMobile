@@ -17,8 +17,8 @@ public class BaseForm extends Form {
     public void installSidemenu(Resources res) {
         Image selection = res.getImage("selection-in-sidemenu.png");
         
-        Image galeriesImage = null;
-        if(isCurrentInbox()) galeriesImage = selection;
+        Image votesImage = null;
+        if(isCurrentInbox()) votesImage = selection;
 
         Image trendingImage = null;
         if(isCurrentTrending()) trendingImage = selection;
@@ -29,16 +29,21 @@ public class BaseForm extends Form {
         Image statsImage = null;
         if(isCurrentStats()) statsImage = selection;
         
-        Button galerieButton = new Button("Liste Votes", galeriesImage);
-        galerieButton.setUIID("SideCommand");
-        galerieButton.getAllStyles().setPaddingBottom(0);
-        Container inbox = FlowLayout.encloseMiddle(galerieButton);//, new Label("18", "SideCommandNumber"));
-        inbox.setLeadComponent(galerieButton);
+        Button voteButton = new Button("Liste Votes", trendingImage);
+        voteButton.setUIID("SideCommand");
+        voteButton.getAllStyles().setPaddingBottom(0);
+        Container inbox = FlowLayout.encloseMiddle(voteButton);//, new Label("18", "SideCommandNumber"));
+        inbox.setLeadComponent(voteButton);
         inbox.setUIID("SideCommand");
-        galerieButton.addActionListener(e -> new ListGaleries().show());
+        voteButton.addActionListener(e -> new ListVotes().show());
         getToolbar().addComponentToSideMenu(inbox);
         
         getToolbar().addCommandToSideMenu("Votes", statsImage, e -> new StatsForm(res).show());
+        getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
+        getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
+        getToolbar().addCommandToSideMenu("Map", null, e -> {});
+        getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());
+        getToolbar().addCommandToSideMenu("Settings", null, e -> {});
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));

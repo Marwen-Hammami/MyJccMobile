@@ -65,7 +65,7 @@ public class ServiceVote {
     
     public boolean updateVote(String film,String user,String valeur,String Date_Vote,String commentaire,String Vote_Film) {    
         // http://127.0.0.1:8000/mobileupdate/30?idfilm=1&iduser=693&valeur=0&dateVote=12/05/2023&commentaire=sssss&votefilm=0
-        String url = Statics.BASE_URL + "mobileNew?idfilm=" + film + "&iduser=" + user
+        String url = Statics.BASE_URL + "mobileupdate?idfilm=" + film + "&iduser=" + user
             + "&valeur=" + valeur+ "&dateVote=" + Date_Vote + "&commentaire=" + commentaire  + "&votefilm=" + Vote_Film;
         /*String part1 = url.substring(0, url.indexOf("#"));
         String part2 = url.substring(url.indexOf("#") + 1, url.length());
@@ -85,7 +85,7 @@ public class ServiceVote {
     }
     
     public boolean deleteVote(String idVote) {    
-        // http://127.0.0.1:8000/mobileDelete/30
+        // http://127.0.0.1:8000/mobileDelete/29
         String url = Statics.BASE_URL + "mobileDelete/" + idVote ;
         System.out.println(url);
         req.setUrl(url);
@@ -135,7 +135,7 @@ public class ServiceVote {
                 String roleString = spectateurJson.get("role").toString();
                 Type role = Type.valueOf(roleString.toUpperCase());
                 spectateur.setRole(role);
-                spectateur.setPhotoB64(spectateurJson.get("photob64").toString());
+                spectateur.setPhotoB64(spectateurJson.get("photoB64").toString());
                 //spectateur.setNumTel(Integer.parseInt(spectateurJson.get("numtel").toString()));
                 g.setUser(spectateur);
                 
@@ -151,7 +151,7 @@ public class ServiceVote {
     
     
     public ArrayList<Vote> getAllVotes() {
-        String url = Statics.BASE_URL + "mobileVotes/";
+        String url = Statics.BASE_URL + "mobileVotes";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
