@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.gui;
+package gui;
 
 import com.codename1.io.Preferences;
 
@@ -22,7 +22,7 @@ public class SessionManager {
     private static String userName ; 
     private static String email; 
     private static String passowrd ;
-    private static String photo;
+    private static String photob64;
 
     public static Preferences getPref() {
         return pref;
@@ -64,12 +64,12 @@ public class SessionManager {
          pref.set("passowrd",passowrd);
     }
 
-    public static String getPhoto() {
-        return pref.get("photo",photo);
+    public static String getPhotob64() {
+        return pref.get("photo",photob64);
     }
 
-    public static void setPhoto(String photo) {
-         pref.set("photo",photo);
+    public static void setPhotob64(String photob64) {
+         pref.set("photo",photob64);
     }
     
     

@@ -23,9 +23,11 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.plaf.Style;
 import entities.Galerie;
+import entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import services.ServiceGalerie;
+import services.ServiceUtilisateur;
 
 public class ListGaleries extends BaseForm {
 
@@ -42,13 +44,13 @@ public class ListGaleries extends BaseForm {
     
     public ListGaleries(com.codename1.ui.util.Resources resourceObjectInstance) {
         //get toutes les galeries
-        ArrayList<Galerie> galeries = ServiceGalerie.getInstance().getAllGaleries();
+        ArrayList<User> galeries = ServiceUtilisateur.getInstance().affichageReclamations();
 
         initGuiBuilderComponents(resourceObjectInstance, galeries);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Galeries", "Title")//,
+                        new Label("Utilisateurs", "Title")//,
                         //new Label("19", "InboxNumber")
                 )
         );
@@ -75,21 +77,18 @@ public class ListGaleries extends BaseForm {
     }
     
     //Ancienne methode pour populer l'affichage des galeries
-    public void addElement(Galerie gal) {
+    public void addElement(User gal) {
         Container card = new Container(new BorderLayout());
         card.getStyle().setMargin(0, 0, 10, 10);
 
-        Label title = new Label(gal.getNom(), "Title");
+        Label title = new Label(gal.getUsername(), "Title");
         title.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.NORTH, title);
 
-        Label description = new Label(gal.getDescription(), "Description");
+        Label description = new Label(gal.getEmail(), "Description");
         description.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.CENTER, description);
 
-        Label date = new Label(gal.getCouleurHtml(), "Date");
-        date.getStyle().setMargin(2, 2, 0, 0);
-        card.add(BorderLayout.SOUTH, date);
 
         // add the card to your form or container
         addComponent(card);
@@ -103,11 +102,12 @@ public class ListGaleries extends BaseForm {
 
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<Galerie> galeries) {
+    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<User> galeries) {
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
         setName("InboxForm");
-        for (Galerie gal : galeries) {
+        for (User gal : galeries) {
+            System.out.println(gal);
         com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         com.codename1.ui.Container gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
         com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
@@ -119,7 +119,7 @@ public class ListGaleries extends BaseForm {
         com.codename1.ui.TextArea gui_Text_Area_1 = new com.codename1.ui.TextArea();
         com.codename1.ui.Label gui_Label_6 = new com.codename1.ui.Label();
         //click event
-        gui_Text_Area_1.addPointerPressedListener(e -> {
+      /*  gui_Text_Area_1.addPointerPressedListener(e -> {
             elementClicked(resourceObjectInstance, gui_Label_4, gal);
         });
         gui_Label_2.addPointerPressedListener(e -> {
@@ -133,7 +133,7 @@ public class ListGaleries extends BaseForm {
         });
         gui_Label_4.addPointerPressedListener(e -> {
             elementClicked(resourceObjectInstance, gui_Label_4, gal);
-        });
+        });*/
         //release click unclick event
         gui_Text_Area_1.addPointerReleasedListener(e -> {
             elementUnClicked(resourceObjectInstance, gui_Label_4);
@@ -155,8 +155,8 @@ public class ListGaleries extends BaseForm {
         gui_Container_1.setName("Container_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
-        gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText(gal.getPhotographe().getUsername());
+        //gui_Container_2.addComponent(gui_Label_1);
+        gui_Label_1.setText(gal.getUsername());
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
@@ -168,15 +168,16 @@ public class ListGaleries extends BaseForm {
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
         gui_Container_3.setName("Container_3");
+        gui_Container_3.addComponent(gui_Label_1);
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Text_Area_1);
-        gui_Label_3.setText(gal.getNom());
+        gui_Label_3.setText(gal.getEmail());
         gui_Label_3.setName("Label_3");
-        gui_Label_2.setText(gal.getCouleurHtml());
+        gui_Label_2.setText(Integer.toString(gal.getNumTel()));
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
-        gui_Text_Area_1.setText(gal.getDescription());
+        //gui_Text_Area_1.setText(gal.getDescription());
         gui_Text_Area_1.setUIID("SmallFontLabel");
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");

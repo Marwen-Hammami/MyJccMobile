@@ -8,12 +8,17 @@ package services;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
+import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
-import com.mycompany.gui.SessionManager;
+import entities.User;
+import gui.SessionManager;
+import java.util.ArrayList;
+import java.util.List;
 //import com.mycompany.gui.SessionManager;
 import java.util.Map;
 import java.util.Vector;
@@ -88,10 +93,10 @@ public class ServiceUtilisateur {
     
     //SignIn
     
-    public void signin(TextField username,TextField password, Resources rs ) {
+    public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = Statics.BASE_URL+"/user/signin?username="+username.getText().toString()+"&password="+password.getText().toString();
+        String url = Statics.BASE_URL+"/mobile/signin?username="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -125,7 +130,7 @@ public class ServiceUtilisateur {
                 //photo 
                 
                 if(user.get("photo") != null)
-                    SessionManager.setPhoto(user.get("photo").toString());
+                    SessionManager.setPhotob64(user.get("photo").toString());
                 
                 
                 if(user.size() >0 ){} // l9a user
@@ -183,6 +188,65 @@ public class ServiceUtilisateur {
          //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
         NetworkManager.getInstance().addToQueueAndWait(req);
     return json;
+    }
+    
+    
+    
+    public ArrayList<User>affichageReclamations() {
+        ArrayList<User> result = new ArrayList<>();
+        
+        String url = Statics.BASE_URL+"mobileAll";
+        req.setUrl(url);
+        
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonp ;
+                jsonp = new JSONParser();
+                
+                try {
+                    Map<String,Object>mapReclamations = jsonp.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
+                    
+                    List<Map<String,Object>> listOfMaps =  (List<Map<String,Object>>) mapReclamations.get("root");
+                    
+                    for(Map<String, Object> obj : listOfMaps) {
+                        User re = new User();
+                        
+                        //dima id fi codename one float 5outhouha
+                        //float id = Float.parseFloat(obj.get("id").toString());
+                        
+                        String objet = obj.get("username").toString();
+                        
+                        String description = obj.get("email").toString();
+                        float etat = Float.parseFloat(obj.get("numtel").toString());
+                        
+                       // re.setId((int)id);
+                        re.setUsername(objet);
+                        re.setEmail(description);
+                        re.setNumTel((int)etat);
+                        
+                        //Date 
+                       
+                        
+                        //insert data into ArrayList result
+                        result.add(re);
+                       
+                    
+                    }
+                    
+                }catch(Exception ex) {
+                    
+                    ex.printStackTrace();
+                }
+            
+            }
+        });
+        
+      NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha
+
+        return result;
+        
+        
     }
 
 }

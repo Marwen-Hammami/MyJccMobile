@@ -29,7 +29,7 @@ public class BaseForm extends Form {
         Image statsImage = null;
         if(isCurrentStats()) statsImage = selection;
         
-        Button galerieButton = new Button("Liste Galeries", galeriesImage);
+        Button galerieButton = new Button("Liste des utilisateurs", galeriesImage);
         galerieButton.setUIID("SideCommand");
         galerieButton.getAllStyles().setPaddingBottom(0);
         Container inbox = FlowLayout.encloseMiddle(galerieButton);//, new Label("18", "SideCommandNumber"));
