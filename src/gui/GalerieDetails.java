@@ -1,5 +1,6 @@
 package gui;
 
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.EncodedImage;
@@ -9,6 +10,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.util.ImageIO;
 import java.util.ArrayList;
 import entities.Galerie;
@@ -49,7 +51,14 @@ public class GalerieDetails extends BaseForm{
         FontImage mat = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "SigninTitle", 3.5f);
         getToolbar().addCommandToLeftBar("", mat, e2 -> {
             new ListGaleries().showBack();
-    });
+        });
+        
+        //proposer un contrat
+        FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
+        rb.uiid(true);
+        fab.bindFabToContainer(getContentPane());
+        fab.addActionListener(e -> new ProposerContrat(G).show());
     }
     
     public void initDetailsGalerie(com.codename1.ui.util.Resources resourceObjectInstance, Galerie gal){

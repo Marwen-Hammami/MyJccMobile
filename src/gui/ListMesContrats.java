@@ -1,59 +1,46 @@
 package gui;
 
-import TemplatesFiles.*;
-import gui.BaseForm;
-import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
-import com.codename1.ui.CheckBox;
-import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
-import com.codename1.ui.animations.CommonTransitions;
-import com.codename1.ui.events.ActionListener;
-import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.LayeredLayout;
-import com.codename1.ui.plaf.RoundBorder;
-import com.codename1.ui.plaf.Style;
+import entities.ContratSponsoring;
 import entities.Galerie;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import services.ServiceContratSponsoring;
 import services.ServiceGalerie;
 
-public class ListGaleries extends BaseForm {
+public class ListMesContrats extends BaseForm {
+    
+    int idCurrentUserSponsor = 727;
 
-    public ListGaleries() {
+    public ListMesContrats() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
 
     @Override
-    protected boolean isCurrentInbox() {
+    protected boolean isCurrentContarts() {
         return true;
     }
     
-    
-    
-    public ListGaleries(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public ListMesContrats(com.codename1.ui.util.Resources resourceObjectInstance) {
         //get toutes les galeries
-        ArrayList<Galerie> galeries = ServiceGalerie.getInstance().getAllGaleries();
+        ArrayList<ContratSponsoring> contrats = ServiceContratSponsoring.getInstance().getAllContrats(idCurrentUserSponsor);
 
-        initGuiBuilderComponents(resourceObjectInstance, galeries);
+        initGuiBuilderComponents(resourceObjectInstance, contrats);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Galeries", "Title")//,
-                        //new Label("19", "InboxNumber")
+                        new Label("Mes Contrats", "Title"),
+                        new Label(contrats.size() + " contrats", "InboxNumber")
                 )
         );
         
@@ -62,77 +49,64 @@ public class ListGaleries extends BaseForm {
         installSidemenu(resourceObjectInstance);
         
         getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("toolbar-profile-pic.png"), e -> {});
-        
-        /* Partie Admin (Ajouter)
-        FloatingActionButton fab  = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
-        RoundBorder rb = (RoundBorder)fab.getUnselectedStyle().getBorder();
-        rb.uiid(true);
-        fab.bindFabToContainer(getContentPane());
-        fab.addActionListener(e -> new AjouterGalerie().show());
-        */
-    } 
-
-
-// <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<Galerie> galeries) {
+    }
+    
+        private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<ContratSponsoring> contrats) {
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
-        setTitle("InboxForm");
-        setName("InboxForm");
-        for (Galerie gal : galeries) {
+        for (ContratSponsoring cont : contrats) {
         com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         com.codename1.ui.Container gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
+        com.codename1.ui.Label gui_Label_1_email = new com.codename1.ui.Label();
         com.codename1.ui.Container gui_Container_4 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
         com.codename1.ui.Label gui_Label_4 = new com.codename1.ui.Label();
         com.codename1.ui.Container gui_Container_3 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         com.codename1.ui.Label gui_Label_3 = new com.codename1.ui.Label();
         com.codename1.ui.Label gui_Label_2 = new com.codename1.ui.Label();
-        com.codename1.ui.TextArea gui_Text_Area_1 = new com.codename1.ui.TextArea();
+        com.codename1.ui.Label gui_Label_salaire = new com.codename1.ui.Label();
+        com.codename1.ui.Label gui_Label_type = new com.codename1.ui.Label();
+        com.codename1.ui.Label gui_Label_etat = new com.codename1.ui.Label();
         com.codename1.ui.Label gui_Label_separator = new com.codename1.ui.Label();
         //pour l'image utilisateur photographe
         EncodedImage enc = null;
         Image imgs;
         ImageViewer imgv;
-        String img_url = gal.getPhotographe().getPhotoB64() ;
+        String img_url = cont.getPhotoraphe().getPhotoB64() ;
         //click event
-        gui_Text_Area_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+        gui_Label_etat.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
+        });
+        gui_Label_type.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
+        });
+        gui_Label_salaire.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
         });
         gui_Label_2.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
         });
         gui_Label_3.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
         });
         gui_Label_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
+        });
+        gui_Label_1_email.addPointerPressedListener(e -> {
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
         });
         gui_Label_4.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, gal);
-        });
-        //release click unclick event
-        gui_Text_Area_1.addPointerReleasedListener(e -> {
-            elementUnClicked(resourceObjectInstance, gui_Label_4);
-        });
-        gui_Label_2.addPointerReleasedListener(e -> {
-            elementUnClicked(resourceObjectInstance, gui_Label_4);
-        });
-        gui_Label_3.addPointerReleasedListener(e -> {
-            elementUnClicked(resourceObjectInstance, gui_Label_4);
-        });
-        gui_Label_1.addPointerReleasedListener(e -> {
-            elementUnClicked(resourceObjectInstance, gui_Label_4);
-        });
-        gui_Label_4.addPointerReleasedListener(e -> {
-            elementUnClicked(resourceObjectInstance, gui_Label_4);
+            elementClicked(resourceObjectInstance, gui_Label_4, cont);
         });
         // gui_Container_1 est la card
         addComponent(gui_Container_1);
         //Ajout à droite les détails du photographe
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.addComponent(gui_Label_1);
-        gui_Label_1.setText(gal.getPhotographe().getNom()+" "+gal.getPhotographe().getPrenom());
+        gui_Label_1.setText(cont.getPhotoraphe().getNom()+" "+cont.getPhotoraphe().getPrenom());
         gui_Label_1.setUIID("SmallFontLabel");
+        gui_Container_2.addComponent(gui_Label_1_email);
+        gui_Label_1_email.setText(cont.getPhotoraphe().getEmail());
+        gui_Label_1_email.setUIID("SmallFontLabel");
             //partie photographe user picture
         try{
             enc = EncodedImage.create("/loading.png");
@@ -151,35 +125,36 @@ public class ListGaleries extends BaseForm {
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
         //Ajout au milieu les détails de la galerie
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.CENTER, gui_Container_3);
-        gui_Container_3.addComponent(gui_Label_3);
-        gui_Container_3.addComponent(gui_Label_2);
-        gui_Container_3.addComponent(gui_Text_Area_1);
-        gui_Label_3.setText(gal.getNom());
-        gui_Label_2.setText(gal.getCouleurHtml());
-        gui_Label_2.setUIID("RedLabel");
-        gui_Text_Area_1.setText(gal.getDescription());
-        gui_Text_Area_1.setEditable(false);
-        gui_Text_Area_1.setUIID("SmallFontLabel");
+        gui_Container_3.addComponent(gui_Label_3);//date debut
+        gui_Container_3.addComponent(gui_Label_2);//date fin
+        gui_Container_3.addComponent(gui_Label_etat);
+        gui_Container_3.addComponent(gui_Label_type);
+        gui_Container_3.addComponent(gui_Label_salaire);
+        gui_Label_3.setText("Date début: " + cont.getDateDebut());
+        gui_Label_2.setText("Date fin: " + cont.getDateFin());
+        gui_Label_type.setText("Type: " + cont.getType());
+        gui_Label_etat.setText("Etat: " + cont.getEtat());
+        gui_Label_etat.setUIID("RedLabel");
+        gui_Label_salaire.setText("Salaire: " + cont.getSalaireDt());
         //Ajout d'unne barre de séparation dans le bas
         gui_Label_separator.setText("―――――――――――――――――――――――――――");
         gui_Container_1.addComponent(BorderLayout.SOUTH, gui_Label_separator);
         }  
     }
-    
-    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,Galerie gal){
+        
+        private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,ContratSponsoring cont){
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round-selected.png"));
-        new GalerieDetails(gal).show();
-        /* Partie admin (modifier & supprimer)
-        elementLongClicked(gal);
-        */
+        //(modifier & supprimer)
+        elementLongClicked(cont);
+        gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
     }
     
     private void elementUnClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4){
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
     }
     
-    private void elementLongClicked(Galerie gal){
-        Dialog dlg = new Dialog("Galerie: " + gal.getNom(), new BoxLayout(BoxLayout.Y_AXIS));
+    private void elementLongClicked(ContratSponsoring cont){
+        Dialog dlg = new Dialog("Contrat: " + cont.getEtat(), new BoxLayout(BoxLayout.Y_AXIS));
         Label label = new Label("Veuillez sélectionner une action");
         dlg.add(label);
 
@@ -187,14 +162,14 @@ public class ListGaleries extends BaseForm {
         updateBtn.addActionListener(e -> {
             System.out.println("update");
             dlg.dispose();
-            new ModifierGalerie(gal).show();;
+            //new ModifierGalerie(gal).show();;
         });
 
         Button delBtn = new Button("Supprimer");
         delBtn.addActionListener(e -> {
-            ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
+            //ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
             dlg.dispose();
-            new ListGaleries().show();
+            //new ListGaleries().show();
         });
         
         Button annulerBtn = new Button("Annuler");
@@ -206,4 +181,5 @@ public class ListGaleries extends BaseForm {
         dlg.show();
         
     }
+
 }

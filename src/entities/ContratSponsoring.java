@@ -7,8 +7,8 @@ import utils.EnumTypeContrat;
 public class ContratSponsoring {
     //var
     private int ID_Contrat;
-    //private Date DateDebut;
-    //private Date DateFin;
+    private String DateDebut;
+    private String DateFin;
     private EnumTypeContrat Type;
     private EnumEtatContrat Etat;
     private float SalaireDt;
@@ -46,6 +46,37 @@ public class ContratSponsoring {
         this.Photoraphe = Photoraphe;
         this.SignaturePhotographe = SignaturePhotographe;
     }
+
+    public ContratSponsoring(int ID_Contrat, String DateDebut, String DateFin, EnumTypeContrat Type, EnumEtatContrat Etat, float SalaireDt, String TermesPDF, User Sponsor, String SignatureSponsor, User Photoraphe, String SignaturePhotographe) {
+        this.ID_Contrat = ID_Contrat;
+        this.DateDebut = DateDebut;
+        this.DateFin = DateFin;
+        this.Type = Type;
+        this.Etat = Etat;
+        this.SalaireDt = SalaireDt;
+        this.TermesPDF = TermesPDF;
+        this.Sponsor = Sponsor;
+        this.SignatureSponsor = SignatureSponsor;
+        this.Photoraphe = Photoraphe;
+        this.SignaturePhotographe = SignaturePhotographe;
+    }
+
+    public String getDateDebut() {
+        return DateDebut;
+    }
+
+    public void setDateDebut(String DateDebut) {
+        this.DateDebut = DateDebut;
+    }
+
+    public String getDateFin() {
+        return DateFin;
+    }
+
+    public void setDateFin(String DateFin) {
+        this.DateFin = DateFin;
+    }
+    
 
     public int getID_Contrat() {
         return ID_Contrat;

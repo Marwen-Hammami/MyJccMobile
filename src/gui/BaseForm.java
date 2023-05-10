@@ -29,6 +29,9 @@ public class BaseForm extends Form {
         Image statsImage = null;
         if(isCurrentStats()) statsImage = selection;
         
+        Image mesContratsImage = null;
+        if(isCurrentContarts()) mesContratsImage = selection;
+        
         Button galerieButton = new Button("Liste Galeries", galeriesImage);
         galerieButton.setUIID("SideCommand");
         galerieButton.getAllStyles().setPaddingBottom(0);
@@ -39,6 +42,7 @@ public class BaseForm extends Form {
         getToolbar().addComponentToSideMenu(inbox);
         
         getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
+        getToolbar().addCommandToSideMenu("Mes Contrats", mesContratsImage, e -> new ListMesContrats().show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Map", null, e -> {});
         getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());
@@ -65,6 +69,10 @@ public class BaseForm extends Form {
     }
 
     protected boolean isCurrentStats() {
+        return false;
+    }
+    
+    protected boolean isCurrentContarts() {
         return false;
     }
 }

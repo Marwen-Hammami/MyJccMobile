@@ -19,7 +19,6 @@ public class AjouterGalerie extends com.codename1.ui.Form {
         getToolbar().getTitleComponent().setUIID("SigninTitle");
         FontImage mat = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "SigninTitle", 3.5f);
         getToolbar().addCommandToLeftBar("", mat, e2 -> {
-            System.out.println("close------------------");
             new ListGaleries().showBack();
     });
         getContentPane().setUIID("SignInForm");
