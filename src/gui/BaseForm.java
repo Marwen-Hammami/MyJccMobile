@@ -41,8 +41,9 @@ public class BaseForm extends Form {
         galerieButton.addActionListener(e -> new ListGaleries().show());
         getToolbar().addComponentToSideMenu(inbox);
         
-        getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
+        
         getToolbar().addCommandToSideMenu("Mes Contrats", mesContratsImage, e -> new ListMesContrats().show());
+        getToolbar().addCommandToSideMenu("Stats Contrats", statsImage, e -> new StatistiquePieForm().show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Map", null, e -> {});
         getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());

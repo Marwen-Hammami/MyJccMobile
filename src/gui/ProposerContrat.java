@@ -86,7 +86,7 @@ public class ProposerContrat extends BaseForm{
         gui_Container_1.addComponent(gui_Label_1);
         gui_Label_1.setUIID("CenterLabel");
         gui_Label_1.setName("Label_1");
-        gui_Label_1.setText(G.getPhotographe().getNom()+" "+G.getPhotographe().getNom());
+        gui_Label_1.setText(G.getPhotographe().getNom()+" "+G.getPhotographe().getPrenom());
         gui_Container_1.addComponent(gui_Component_Group_1);
         gui_Component_Group_1.setName("Component_Group_1");
         gui_Component_Group_1.addComponent(gui_Text_Field_dateDebut);

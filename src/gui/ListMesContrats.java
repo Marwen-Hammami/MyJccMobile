@@ -32,7 +32,7 @@ public class ListMesContrats extends BaseForm {
     }
     
     public ListMesContrats(com.codename1.ui.util.Resources resourceObjectInstance) {
-        //get toutes les galeries
+        //get toutes les contrats d'un sponsor
         ArrayList<ContratSponsoring> contrats = ServiceContratSponsoring.getInstance().getAllContrats(idCurrentUserSponsor);
 
         initGuiBuilderComponents(resourceObjectInstance, contrats);
@@ -130,8 +130,8 @@ public class ListMesContrats extends BaseForm {
         gui_Container_3.addComponent(gui_Label_etat);
         gui_Container_3.addComponent(gui_Label_type);
         gui_Container_3.addComponent(gui_Label_salaire);
-        gui_Label_3.setText("Date début: " + cont.getDateDebut());
-        gui_Label_2.setText("Date fin: " + cont.getDateFin());
+        gui_Label_3.setText("Date début: " + cont.getDateDebut().substring(0, 10));
+        gui_Label_2.setText("Date fin: " + cont.getDateFin().substring(0, 10));
         gui_Label_type.setText("Type: " + cont.getType());
         gui_Label_etat.setText("Etat: " + cont.getEtat());
         gui_Label_etat.setUIID("RedLabel");
