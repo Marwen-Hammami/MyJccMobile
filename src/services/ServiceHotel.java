@@ -47,11 +47,11 @@ public class ServiceHotel {
     //   http://127.0.0.1:8000/mobileNewhotel?libelle=testNewLibelle&adresse=testNewAdresse&nbreChambres=10&telephone=12345678&description=testNewDescription
         String url = Statics.BASE_URL + "mobileNewhotel?libelle=" + libelle + "&adresse=" + adresse
             + "&nbreChambres=" + nbreChambres + "&telephone=" + telephone + "&description=" + description;
-        System.out.println("ahawaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
         System.out.println(url);
         String part1 = url.substring(0, url.indexOf("#"));
         String part2 = url.substring(url.indexOf("#") + 1, url.length());
-        req.setUrl(part1 + "%23" + part2);
+        req.setUrl(part1);
         req.setPost(false);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -80,8 +80,14 @@ public class ServiceHotel {
                 h.setId((int) id);
                 h.setLibelle(obj.get("libelle").toString());
                 h.setAdresse(obj.get("adresse").toString()) ;
-                h.setNbre_chambres(Integer.parseInt(obj.get("nbreChambres").toString()));
-                h.setTelephone(Integer.parseInt(obj.get("telephone").toString())); 
+                double nbreChambresDouble = Double.parseDouble(obj.get("nbreChambres").toString());
+                int nbreChambres = (int) nbreChambresDouble;
+                h.setNbre_chambres(nbreChambres);
+                
+                double telephoneDouble = Double.parseDouble(obj.get("telephone").toString());
+                int telephone = (int) telephoneDouble;
+                h.setTelephone(telephone);
+
                 h.setDescription(obj.get("description").toString()); 
                 hotels.add(h);
             }
@@ -105,7 +111,7 @@ public class ServiceHotel {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return hotels;
     }
-    //modifierrr hotelll
+  /*  //modifierrr hotelll
      public boolean modifierHotel(int id, String libelle, String adresse, int nbreChambres, int telephone, String description) {    
 // http://127.0.0.1:8000/hotel/mobileUpdate/1?libelle=testNewLibelle&adresse=testNewAdresse&nbreChambres=10&telephone=12345678&description=testNewDescription
         String url = Statics.BASE_URL + "mobileUpdate" + id + "?libelle=" + libelle + "&adresse=" + adresse
@@ -142,6 +148,6 @@ public class ServiceHotel {
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
-    }
+    }*/
     
 }

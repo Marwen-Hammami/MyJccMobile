@@ -51,6 +51,10 @@ public class User {
         this.NumTel=NumTel;
     }
 
+    public User(int userId, String userNom, String userPrenom, String userGenre, String userEmail, String userMotDePasse, Type userRole, String userPhotoB64, int userNumTel, String userQRcode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     
 

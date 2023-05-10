@@ -38,6 +38,19 @@ public class BaseForm extends Form {
         hotelButton.addActionListener(e -> new ListHotels().show());
         getToolbar().addComponentToSideMenu(inbox);
         
+        //bouton reservation
+Button reservationsButton = new Button("Mes réservations", hotelImage);
+reservationsButton.setUIID("SideCommand");
+reservationsButton.getAllStyles().setPaddingBottom(0);
+Container reservationsContainer = FlowLayout.encloseMiddle(reservationsButton);
+reservationsContainer.setLeadComponent(reservationsButton);
+reservationsContainer.setUIID("SideCommand");
+reservationsButton.addActionListener(e -> new ListReservationHotels().show());
+getToolbar().addComponentToSideMenu(reservationsContainer);
+
+
+
+        
         getToolbar().addCommandToSideMenu("Stats", statsImage, e -> new StatsForm(res).show());
         getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
         getToolbar().addCommandToSideMenu("Map", null, e -> {});

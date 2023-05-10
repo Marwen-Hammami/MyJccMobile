@@ -4,6 +4,22 @@
  * and open the template in the editor.
  */
 package gui;
+
+import com.codename1.components.FloatingActionButton;
+import com.codename1.ui.Button;
+import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
+import com.codename1.ui.Label;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.RoundBorder;
+import entities.Hotel;
+import entities.ReservationHotel;
+import java.util.ArrayList;
+import services.ServiceHotel;
+import services.ServiceReservationHotel;
 import TemplatesFiles.*;
 import gui.BaseForm;
 import com.codename1.components.FloatingActionButton;
@@ -32,14 +48,12 @@ import entities.Hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-import services.ServiceHotel;
-
 /**
  *
  * @author youssef
  */
-public class ListHotels  extends BaseForm {
-   public ListHotels() {
+public class ListReservationHotels extends BaseForm {
+ public ListReservationHotels() {
         this(com.codename1.ui.util.Resources.getGlobalResources());
     }
 
@@ -48,15 +62,15 @@ public class ListHotels  extends BaseForm {
         return true;
     }
 
-    public ListHotels(com.codename1.ui.util.Resources resourceObjectInstance) {
+    public ListReservationHotels(com.codename1.ui.util.Resources resourceObjectInstance) {
         //get toutes les galeries
-        ArrayList<Hotel> hotels = ServiceHotel.getInstance().getAllHotels();
+        ArrayList<ReservationHotel> reservations = ServiceReservationHotel.getInstance().getAllResevationsHotel();
 
-        initGuiBuilderComponents(resourceObjectInstance, hotels);
+        initGuiBuilderComponents(resourceObjectInstance, reservations);
         
         getToolbar().setTitleComponent(
                 FlowLayout.encloseCenterMiddle(
-                        new Label("Hotels", "Libelle")//,
+                        new Label("Reservation", "Libelle")//,
                         //new Label("19", "InboxNumber")
                 )
         );
@@ -82,21 +96,24 @@ public class ListHotels  extends BaseForm {
     }
     
     //Ancienne methode pour populer l'affichage des galeries
-    public void addElement(Hotel hotel) {
+    public void addElement(ReservationHotel reservation) {
         Container card = new Container(new BorderLayout());
         card.getStyle().setMargin(0, 0, 10, 10);
 
-        Label title = new Label(hotel.getLibelle(), "Libelle");
+        Label title = new Label(reservation.getHotel().getLibelle(), "libelleHotel");
         title.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.NORTH, title);
 
-        Label description = new Label(hotel.getDescription(), "Description");
+        Label description = new Label(reservation.getUser().getEmail(), "email");
         description.getStyle().setMargin(2, 2, 0, 0);
         card.add(BorderLayout.CENTER, description);
 
-        Label tel = new Label(hotel.getAdresse(), "Adresse");
-        tel.getStyle().setMargin(2, 2, 0, 0);
-        card.add(BorderLayout.SOUTH, tel);
+        Label DateD = new Label(reservation.getDateDebutAsString(), "dateD");
+        DateD.getStyle().setMargin(2, 2, 0, 0);
+        card.add(BorderLayout.SOUTH, DateD);
+        Label DateF = new Label(reservation.getDateFinAsString(), "dateF");
+        DateF.getStyle().setMargin(2, 2, 0, 0);
+        card.add(BorderLayout.SOUTH, DateF);
 
         // add the card to your form or container
         addComponent(card);
@@ -105,11 +122,11 @@ public class ListHotels  extends BaseForm {
      //---------------------------------------------
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<Hotel> hotels) {
+    private void initGuiBuilderComponents(com.codename1.ui.util.Resources resourceObjectInstance, ArrayList<ReservationHotel> reservations) {
         setLayout(new com.codename1.ui.layouts.BoxLayout(com.codename1.ui.layouts.BoxLayout.Y_AXIS));
         setTitle("InboxForm");
         setName("InboxForm");
-        for (Hotel hot : hotels) {
+        for (ReservationHotel res : reservations) {
         com.codename1.ui.Container gui_Container_1 = new com.codename1.ui.Container(new com.codename1.ui.layouts.BorderLayout());
         com.codename1.ui.Container gui_Container_2 = new com.codename1.ui.Container(new com.codename1.ui.layouts.FlowLayout());
         com.codename1.ui.Label gui_Label_1 = new com.codename1.ui.Label();
@@ -122,19 +139,19 @@ public class ListHotels  extends BaseForm {
         com.codename1.ui.Label gui_Label_6 = new com.codename1.ui.Label();
         //click event
         gui_Text_Area_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, hot);
+            elementClicked(resourceObjectInstance, gui_Label_4, res);
         });
         gui_Label_2.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, hot);
+            elementClicked(resourceObjectInstance, gui_Label_4, res);
         });
         gui_Label_3.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, hot);
+            elementClicked(resourceObjectInstance, gui_Label_4, res);
         });
         gui_Label_1.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, hot);
+            elementClicked(resourceObjectInstance, gui_Label_4, res);
         });
         gui_Label_4.addPointerPressedListener(e -> {
-            elementClicked(resourceObjectInstance, gui_Label_4, hot);
+            elementClicked(resourceObjectInstance, gui_Label_4, res);
         });
         //release click unclick event
         gui_Text_Area_1.addPointerReleasedListener(e -> {
@@ -158,7 +175,7 @@ public class ListHotels  extends BaseForm {
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.EAST, gui_Container_2);
         gui_Container_2.setName("Container_2");
         gui_Container_2.addComponent(gui_Label_1);
-       // gui_Label_1.setText(hot.getPhotographe().getNom()+" "+gal.getPhotographe().getPrenom());
+        gui_Label_1.setText(res.getUser().getNom()+" "+res.getUser().getPrenom());
         gui_Label_1.setUIID("SmallFontLabel");
         gui_Label_1.setName("Label_1");
         gui_Container_1.addComponent(com.codename1.ui.layouts.BorderLayout.WEST, gui_Container_4);
@@ -173,12 +190,12 @@ public class ListHotels  extends BaseForm {
         gui_Container_3.addComponent(gui_Label_3);
         gui_Container_3.addComponent(gui_Label_2);
         gui_Container_3.addComponent(gui_Text_Area_1);
-        gui_Label_3.setText(hot.getLibelle());
+        gui_Label_3.setText(res.getUser().getEmail());
         gui_Label_3.setName("Label_3");
-        gui_Label_2.setText(hot.getDescription());
+       // gui_Label_2.setText(res.getDateReservationAsString());
         gui_Label_2.setUIID("RedLabel");
         gui_Label_2.setName("Label_2");
-        gui_Text_Area_1.setText(hot.getAdresse());
+        gui_Text_Area_1.setText(res.getHotel().getLibelle());
         gui_Text_Area_1.setUIID("SmallFontLabel");
         gui_Text_Area_1.setName("Text_Area_1");
         gui_Container_2.setName("Container_2");
@@ -192,9 +209,9 @@ public class ListHotels  extends BaseForm {
         
         
     }
-    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,Hotel hot){
+    private void elementClicked(com.codename1.ui.util.Resources resourceObjectInstance, com.codename1.ui.Label gui_Label_4,ReservationHotel res){
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round-selected.png"));
-        elementLongClicked(hot);
+        elementLongClicked(res);
         elementUnClicked(resourceObjectInstance, gui_Label_4);
     }
     
@@ -202,15 +219,15 @@ public class ListHotels  extends BaseForm {
         gui_Label_4.setIcon(resourceObjectInstance.getImage("label_round.png"));
     }
     
-    private void elementLongClicked(Hotel hot){
-        Dialog dlg = new Dialog("Hotel: " + hot.getLibelle(), new BoxLayout(BoxLayout.Y_AXIS));
+    private void elementLongClicked(ReservationHotel res){
+        Dialog dlg = new Dialog("Reservation: " +res.getUser().getEmail(), new BoxLayout(BoxLayout.Y_AXIS));
         Label label = new Label("Veuillez sélectionner une action");
         dlg.add(label);
         
         Button reserverBtn = new Button("Réserver");
         reserverBtn.addActionListener(e -> {
         dlg.dispose();
-        AjouterReservationHotel ajouterReservationHotel = new AjouterReservationHotel(hot.getId());
+        AjouterReservationHotel ajouterReservationHotel = new AjouterReservationHotel(res.getIdReservationH());
         ajouterReservationHotel.show();
     });
 
@@ -223,21 +240,22 @@ public class ListHotels  extends BaseForm {
             new ModifierGalerie(gal).show();;
         });*/
 
-      /*  Button delBtn = new Button("Supprimer");
+        Button delBtn = new Button("Supprimer");
         delBtn.addActionListener(e -> {
-            ServiceGalerie.getInstance().deleteGalerie(String.valueOf(gal.getID_Galerie()));
+            ServiceReservationHotel.getInstance().deleteReservation(String.valueOf(res.getIdReservationH()));
             dlg.dispose();
-            new ListGaleries().show();
-        });*/
+            new ListReservationHotels().show();
+        });
         
         Button annulerBtn = new Button("Annuler");
         annulerBtn.addActionListener(e -> {
             dlg.dispose();
         });
 
-        dlg.add(new Container(new BoxLayout(BoxLayout.X_AXIS)).add(reserverBtn)./*add(updateBtn).add(delBtn).*/add(annulerBtn));
+        dlg.add(new Container(new BoxLayout(BoxLayout.X_AXIS))/*.add(reserverBtn)add(updateBtn)*/.add(delBtn).add(annulerBtn));
         dlg.show();
         
     }
-}
         
+    
+}
