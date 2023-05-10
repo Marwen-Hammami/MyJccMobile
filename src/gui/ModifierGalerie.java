@@ -23,7 +23,7 @@ public class ModifierGalerie extends com.codename1.ui.Form {
         FontImage mat = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "SigninTitle", 3.5f);
         getToolbar().addCommandToLeftBar("", mat, e2 -> {
             System.out.println("close------------------");
-            new ListGaleries().show();
+            new ListGaleries().showBack();
     });
         getContentPane().setUIID("SignInForm");
     }

@@ -2,6 +2,7 @@ package TemplatesFiles;
 
 import com.codename1.ui.FontImage;
 import gui.ListGaleries;
+import gui.WalkthruForm;
 
 public class SignInForm extends com.codename1.ui.Form {
 
@@ -15,7 +16,8 @@ public class SignInForm extends com.codename1.ui.Form {
         getToolbar().setUIID("Container");
         getToolbar().getTitleComponent().setUIID("SigninTitle");
         FontImage mat = FontImage.createMaterial(FontImage.MATERIAL_CLOSE, "SigninTitle", 3.5f);
-        getToolbar().addCommandToLeftBar("", mat, e -> new SplashForm().show());
+        //ajout de la croit de fermeture
+        getToolbar().addCommandToLeftBar("", mat, e -> new WalkthruForm().showBack());
         getContentPane().setUIID("SignInForm");
     }
 
