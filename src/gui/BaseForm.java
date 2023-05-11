@@ -32,6 +32,12 @@ public class BaseForm extends Form {
         Image mesContratsImage = null;
         if(isCurrentContarts()) mesContratsImage = selection;
         
+        Image listFilms = null;
+        if(isCurrentListFilm()) mesContratsImage = selection;
+        
+        Image ajoutFilm= null;
+        if(isCurrentAjoutFilm()) mesContratsImage = selection;
+        
         Button galerieButton = new Button("Liste Galeries", galeriesImage);
         galerieButton.setUIID("SideCommand");
         galerieButton.getAllStyles().setPaddingBottom(0);
@@ -46,6 +52,8 @@ public class BaseForm extends Form {
         getToolbar().addCommandToSideMenu("Stats Contrats", statsImage, e -> new StatistiquePieForm().show());
         getToolbar().addCommandToSideMenu("ListHotels", calendarImage, e -> new ListHotels().show());
         getToolbar().addCommandToSideMenu("Mes Reservations", trendingImage, e -> new ListReservationHotels().show());
+        getToolbar().addCommandToSideMenu("Liste des Films", listFilms, e -> new ListFilms().show());
+        getToolbar().addCommandToSideMenu("Ajouter un film", ajoutFilm, e -> new AjouterFilm().show());
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
@@ -72,6 +80,12 @@ public class BaseForm extends Form {
     }
     
     protected boolean isCurrentContarts() {
+        return false;
+    }
+    protected boolean isCurrentListFilm() {
+        return false;
+    }
+    protected boolean isCurrentAjoutFilm() {
         return false;
     }
 }
