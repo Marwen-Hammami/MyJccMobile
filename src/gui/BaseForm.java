@@ -44,10 +44,8 @@ public class BaseForm extends Form {
         
         getToolbar().addCommandToSideMenu("Mes Contrats", mesContratsImage, e -> new ListMesContrats().show());
         getToolbar().addCommandToSideMenu("Stats Contrats", statsImage, e -> new StatistiquePieForm().show());
-        getToolbar().addCommandToSideMenu("Calendar", calendarImage, e -> new CalendarForm(res).show());
-        getToolbar().addCommandToSideMenu("Map", null, e -> {});
-        getToolbar().addCommandToSideMenu("Trending", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Settings", null, e -> {});
+        getToolbar().addCommandToSideMenu("ListHotels", calendarImage, e -> new ListHotels().show());
+        getToolbar().addCommandToSideMenu("Mes Reservations", trendingImage, e -> new ListReservationHotels().show());
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
