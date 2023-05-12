@@ -4,17 +4,37 @@ import TemplatesFiles.CalendarForm;
 import TemplatesFiles.InboxForm;
 import TemplatesFiles.StatsForm;
 import TemplatesFiles.TrendingForm;
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import entities.User;
+import java.io.IOException;
+import services.ServiceLogin;
 
 public class BaseForm extends Form {
     public void installSidemenu(Resources res) {
+        User currentUser = ServiceLogin.user;
+        
+            //pour l'image utilisateur photographe
+        EncodedImage enc = null;
+        Image imgs;
+        String img_url = currentUser.getPhotoB64() ;
+        try{
+            enc = EncodedImage.create("/loading.png");
+        }catch (IOException ex){
+            System.out.println("Erreur de load.png IMAGE, lors de l'encodage -- " + ex);
+        }
+        imgs = URLImage.createToStorage(enc, img_url, img_url, URLImage.RESIZE_SCALE);
+        Image scaledImage = imgs.scaled(300, 300);
+        
         Image selection = res.getImage("selection-in-sidemenu.png");
         
         Image galeriesImage = null;
@@ -61,9 +81,9 @@ public class BaseForm extends Form {
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
-        getToolbar().addComponentToSideMenu(new Label(res.getImage("profile_image.png"), "Container"));
-        getToolbar().addComponentToSideMenu(new Label("Detra Mcmunn", "SideCommandNoPad"));
-        getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
+        getToolbar().addComponentToSideMenu(new Label(scaledImage, "Container"));
+        getToolbar().addComponentToSideMenu(new Label(currentUser.getNom()+" "+currentUser.getPrenom(), "SideCommandNoPad"));
+        getToolbar().addComponentToSideMenu(new Label(currentUser.getEmail(), "SideCommandSmall"));
     }
 
         

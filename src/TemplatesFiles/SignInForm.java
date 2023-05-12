@@ -3,6 +3,7 @@ package TemplatesFiles;
 import com.codename1.ui.FontImage;
 import gui.ListGaleries;
 import gui.WalkthruForm;
+import services.ServiceLogin;
 
 public class SignInForm extends com.codename1.ui.Form {
 
@@ -74,9 +75,9 @@ public class SignInForm extends com.codename1.ui.Form {
         gui_Component_Group_1.setName("Component_Group_1");
         gui_Component_Group_1.addComponent(gui_Text_Field_2);
         gui_Component_Group_1.addComponent(gui_Text_Field_1);
-        gui_Text_Field_2.setText("TextField");
+        gui_Text_Field_2.setText("Email");
         gui_Text_Field_2.setName("Text_Field_2");
-        gui_Text_Field_1.setText("TextField");
+        gui_Text_Field_1.setText("Mot de passe");
         gui_Text_Field_1.setName("Text_Field_1");
         gui_Container_1.addComponent(gui_Button_2);
         gui_Container_1.addComponent(gui_Button_3);
@@ -99,6 +100,7 @@ public class SignInForm extends com.codename1.ui.Form {
 
 //-- DON'T EDIT ABOVE THIS LINE!!!
     public void onButton_2ActionEvent(com.codename1.ui.events.ActionEvent ev) {
+        ServiceLogin.getInstance().Login(gui_Text_Field_2.getText());
         new ListGaleries().show();
     }
 
